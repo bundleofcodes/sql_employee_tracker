@@ -16,8 +16,10 @@
   "description": "",
   "version": "1.0.0",
   "main": "server.js",
-  "devDependencies": {},
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "esm": "^3.2.25"
+  }
 }

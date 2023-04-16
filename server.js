@@ -3,7 +3,8 @@ const mysql = require('mysql2');
 // interact with user via the command line
 const inquirer = require('inquirer');
 // terminal string styline
-const chalk = require('chalk');
+const chalk = require("esm")(module/*, options*/)
+// const  asciiartLogo = require('asciiart-logo');
 // implement FIGfont
 const figlet = require('figlet');
 // dotenv for environmental variables
@@ -13,21 +14,20 @@ require('console.table');
 
 const connection = mysql.createConnection( {
     host: 'localhost',
-    port: 3306,
     user: 'root',
-    password: process.env.DB_PASSWORD,
+    password: '',
     database: 'employeeTracker_db'
 })
 
 
-// connection.connect();
-console.log(chalk.white.bold('======================================================='));
-console.log(``);
-console.log(chalk.yellow.bold(figlet.textSync('EMPLOYEE TRACKER')));
-console.log(``);
-console.log(`                      ` + chalk.pink.bold('(C)ONTENT (M)ANAGMENT (S)YSTEM'));
-console.log(``);
-console.log(chalk.blue.bold(`=======================================================+=`));
+connection.connect();
+// console.log(chalk.white.bold('======================================================='));
+// console.log(``);
+// console.log(chalk.yellow.bold(figlet.textSync('EMPLOYEE TRACKER')));
+// console.log(``);
+// console.log(`                      ` + chalk.pink.bold('(C)ONTENT (M)ANAGMENT (S)YSTEM'));
+// console.log(``);
+// console.log(chalk.blue.bold(`=======================================================+=`));
 
 
 const printMenuPrompts = () => {
@@ -37,7 +37,7 @@ const printMenuPrompts = () => {
         type: 'list',
         message: 'PLEASE SELECT A MENU OPTION...',
         choices: [
-            'View All Eployees',
+            'View All Employees',
             'View All Roles',
             'View All Departments',
             'View Employees By Manager',
@@ -45,10 +45,10 @@ const printMenuPrompts = () => {
             'Add New Employee',
             'Add New Role',
             'Add New Department',
-            chalk.yellow('Update Employee Managers'),
-            chalk.yellow('Delete Employee'),
-            chalk.yellow('Delete Role'),
-            chalk.yellow('Delete Department'),
+            'Update Employee Managers',
+            'Delete Employee',
+            'Delete Role',
+            'Delete Department',
             'Exit Menu',
             
         ],
@@ -314,7 +314,7 @@ const addNewDepartment = () => {
 };
 
 connection.connect((err) => {
-    if (err) throw err;
+    // if (err) throw err;
 
     printMenuPrompts();
 });
