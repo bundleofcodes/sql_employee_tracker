@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 // interact with user via the command line
 const inquirer = require('inquirer');
 // terminal string styline
-const chalk = require("esm")(module/*, options*/)
+// const chalk = require("esm")(module/*, options*/)
 // const  asciiartLogo = require('asciiart-logo');
 // implement FIGfont
 const figlet = require('figlet');
@@ -12,15 +12,18 @@ require('dotenv').config();
 // print MySQL rows to the console
 require('console.table');
 
-const connection = mysql.createConnection( {
+const connection = mysql.createConnection ({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'employeeTracker_db'
+    database: 'employeeTracker_db',
+    port: '3306'
 })
 
-
-connection.connect();
+connection.connect(function (err) {
+    if (err) {console.log(err)};
+})
+// connection.connect();
 // console.log(chalk.white.bold('======================================================='));
 // console.log(``);
 // console.log(chalk.yellow.bold(figlet.textSync('EMPLOYEE TRACKER')));
@@ -50,49 +53,50 @@ const printMenuPrompts = () => {
             'Delete Role',
             'Delete Department',
             'Exit Menu',
-            
         ],
 
     })
     .then((answers) => {
-        const { choices } = answers;
+        // console.log(answers);
+        // console.log(answers.choices);
+        const choices = answers.choices;
         if (choices === 'View All Employees') {
             viewAllEmployees();
         }
-        if(choices === 'View All Roles') {
+        else if(choices === 'View All Roles') {
             viewAllRoles();
         }
-        if(choices === 'View All Departments') {
+        else if(choices === 'View All Departments') {
             viewAllDepartments();
         }
-        if(choices === 'View Employess By Manager') {
+        else if(choices === 'View Employess By Manager') {
             viewEmployeesByManager();
         }
-        if(choices === 'Update Employee Role') {
+        else if(choices === 'Update Employee Role') {
             updateEmployeeRole();
         }
-        if(choices === 'Add New Employee') {
+        else if(choices === 'Add New Employee') {
             addNewEmployee();
         }
-        if(choices === 'Add New Role') {
+        else if(choices === 'Add New Role') {
             addNewRole();
         }
-        if(choices === 'Add New Department') {
+        else if(choices === 'Add New Department') {
             addNewDepartment();
         }
-        if(choices === 'Update Employee Managers') {
+        else if(choices === 'Update Employee Managers') {
             updateEmployeeManagers();
         }
-        if(choices === 'Delete Employee') {
+        else if(choices === 'Delete Employee') {
             deleteEmployee();
         }
-        if(choices === 'Delete Role') {
+        else if(choices === 'Delete Role') {
             deleteRole();
         }
-        if(choices === 'Delete Department') {
+        else if(choices === 'Delete Department') {
             deleteDepartment();
         }
-        if(choices === 'Exit Menu') {
+        else if(choices === 'Exit Menu') {
             console.log('Successfully Logged Out! Type npm start to login')
             connection.end();
         }
@@ -100,11 +104,23 @@ const printMenuPrompts = () => {
 };
 
 // SQL SELECT * FROM statements for choices
+// function viewAllDepartments() {
+//     connection.query('SELECT * FROM department', (err, data) => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         } else {
+//             console.table(data);
+//         }
+
+//     })
+// }
 const viewAllEmployees = () => {
-    const query = 'SELECT * FROM employee';
-    connection.query(query, (err, res) => {
-        if (err) throw err;
-        console.table(res);
+    console.log('viewAllEmployees');
+    const dbquery = 'SELECT * FROM employee';
+    connection.query(dbquery, function (err, res) {
+        if (err) {throw err
+        } else {console.table(res)};
     })
     printMenuPrompts();
 }
@@ -312,12 +328,12 @@ const addNewDepartment = () => {
             viewAllDepartments();
         });
 };
+printMenuPrompts();
+// connection.connect((err) => {
+//     if (err) throw err;
 
-connection.connect((err) => {
-    // if (err) throw err;
-
-    printMenuPrompts();
-});
+    // printMenuPrompts();
+// });
 
 // Delete Employee Bonus
 // const deleteEmployee = () => {
