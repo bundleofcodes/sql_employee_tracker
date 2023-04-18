@@ -60,7 +60,7 @@ No tests available
 
 ## Features:
 
-- Saved Task Notes
+No features available
 
 ## Questions:
 
