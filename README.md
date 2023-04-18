@@ -36,7 +36,7 @@ The user should clone the repository from GitHub. This application requires Node
 
 - Application Screenshot:
 
-- [...](https://drive.google.com/file/d/1vCDJc-gC8BMtmdFWQb_kM-sESLcCCpOA/view?usp=sharing)
+- [Application Video Walkthrough](https://drive.google.com/file/d/1vCDJc-gC8BMtmdFWQb_kM-sESLcCCpOA/view?usp=sharing)
 
 - [Repository URL](https://github.com/bundleofcodes/sql_employee_tracker)
 
